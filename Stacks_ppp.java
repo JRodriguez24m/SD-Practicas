@@ -1,15 +1,15 @@
-package U1;
+
 import java.util.*;
-public class Stacks {
+public class Stacks_ppp {
 	static Scanner owl=new Scanner (System.in);
-	
+
 	static int[] stack=new int[5];
 	public static void push(int var, int pos){
-			stack[pos]=var;			
+			stack[pos]=var;
 	}
-	
+
 	public static void peek(int pos) {
-		System.out.println("");		
+		System.out.println("");
 		for (int i = 0; i < pos; i++) {
 			System.out.println(stack[i]);
 		}
@@ -17,7 +17,7 @@ public class Stacks {
 	public static void pop(int pos) {
 		stack[pos]=0;
 	}
-	
+
 	public static void main(String[] args) {
 		int val, pos=0, menu,exit=0;
 		char otro='n';
@@ -36,11 +36,11 @@ public class Stacks {
 						System.out.println("\n**Pila llena**\n");
 						otro='n';
 					}else {
-						
+
 						System.out.println("Ingrese el dato");
 						val=owl.nextInt();
 						push(val,pos);
-						
+
 						pos++;
 						System.out.print(" ¿Ingresará otro elemento?(s/n): ");
 						otro=owl.next().charAt(0);
@@ -48,17 +48,37 @@ public class Stacks {
 				} while (otro!='n');
 				break;
 			case 2:
-				peek(pos);								
+				if (pos<=0) {
+					System.out.println("\n**PIla vacia**");
+
+				}else {
+					System.out.println("_____");
+					peek(pos);
+					System.out.println("_____");
+				}
 				break;
 			case 3:
-				pop(pos);
+				do {
+					if(pos<=0) {
+						System.out.println("\n**Pila vacia**\n");
+						otro='n';
+
+					}else {
+						pos--;
+						pop(pos);
+						System.out.println("¿Eliminar otro? (s/n)");
+						otro=owl.next().charAt(0);
+
+					}
+
+				} while (otro!='n');
 				break;
 			default:
 				break;
 			}
 		} while (menu!=0);
-		
-		
+
+
 
 	}
 
