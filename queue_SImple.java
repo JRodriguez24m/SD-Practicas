@@ -31,6 +31,7 @@ class queue_Simple{
       " Menú: \n" +
       "  1. Crear Cola. \n" +
       "  2. Ingresar datos. \n" +
+      "  3. ver\n"+
       "  0. salir. \n" +
       "     Opción: "); Sme=owl.nextInt();
       switch (Sme) {

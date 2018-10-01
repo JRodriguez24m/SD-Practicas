@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class queue_Simple2{
+class queue_Simple3{
   static Scanner owl=new Scanner(System.in);
   static int [] queue = null;
 
@@ -32,15 +32,15 @@ class queue_Simple2{
   }
 
   public static void main(String[] args) {
-    int Sme, pos=0, val=0,f=0;
+    int Sme, pos=0, val=0,f=0,mq;
     char o;
     do {
       System.out.print("\n*Cola Simple, (Creación,push)\n"+
       " Menú: \n" +
       "  1. Crear Cola. \n" +
       "  2. Ingresar datos. \n" +
-      "  3. ver\n"+
-      "  4. Eliminar primero.\n"+
+      "  3. Eliminar primero.\n"+
+      "  4. Mostrar queue\n"+
       "  0. salir. \n" +
       "     Opción: "); Sme=owl.nextInt();
       switch (Sme) {
@@ -68,21 +68,19 @@ class queue_Simple2{
 		            }
 				}while(o!='n');
 			}
-          break;
-
-        case 3:
-        	for (int i = 0; i < queue.length; i++) {
-				System.out.println(queue[i]);
-
-			}
         	break;
-        case 4:
+        case 3:
             if (pos<=0) {
               System.out.println("***Cola vacia***");
             }else {
               pop(pos);
               pos--;
             }
+          break;
+        case 4:
+            do {
+              System.out.print("  1. Ver primer elemento\n"); mq=owl.nextInt();
+            } while (mq!=0);
           break;
 
         default:
