@@ -24,7 +24,6 @@ public class Stacks_pp {
 		do {
 
 			System.out.println(" \nEscriba:\n 1. Ingresar valor\n"
-										  + " 2. Imprimir\n"
 										  + " 0. para salir");
 			menu=owl.nextInt();
 			switch (menu) {
@@ -32,14 +31,19 @@ public class Stacks_pp {
 			//SI el usuario ingresa 0 sale del ciclo y se cierra el programa
 				break;
 			case 1:
+			//INicio del ciclo para llenar Pila
 				do {
+					//condicion para que no se puedan ingresar mas elementos en la Pila
 					if(pos>=5) {
+						//En caso que se cumpla se imprimira que la pila ya esta llena
 						System.out.println("\n**Pila llena**\n");
+						//se asignara n a la variable otro para que no deje ingresar  mas elementos
 						otro='n';
 					}else {
-
+						//si, no se cumple la condicion el usuario podrá seguir ingresando elementos
 						System.out.println("Ingrese el dato");
 						val=owl.nextInt();
+						//Se envia el elemento y la posicion a la cual se va a asignar
 						push(val,pos);
 
 						pos++;
@@ -47,16 +51,6 @@ public class Stacks_pp {
 						otro=owl.next().charAt(0);
 					}
 				} while (otro!='n');
-				break;
-			case 2:
-				if (pos<=0) {
-					System.out.println("\n**PIla vacia**");
-
-				}else {
-					System.out.println("_____");
-					peek(pos);
-					System.out.println("_____");
-				}
 				break;
 			default:
 				break;
