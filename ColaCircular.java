@@ -1,8 +1,12 @@
 import java.awt.print.Printable;
 import java.util.Scanner;
-class ColaDoble{   
+class ColaCircular{   
     public static void main(String[] args) {
         int in=0,ou=0, vla, m, mm;
+        do {
+            System.out.print("Cola circular ");
+        } while (m!=0);
+
     }
 
 }
