@@ -5,7 +5,7 @@ class ColaCircular{
       Cqueue queue=new Cqueue();
       int mm,val;
       char mmm;
-
+//s
       do {
          System.out.print("\nCola circular\n"+
                           "1. Crear Cola\n"+
