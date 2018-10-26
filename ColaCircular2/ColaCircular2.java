@@ -1,5 +1,6 @@
+
 import java.util.Scanner;
-class ColaCircular{
+class ColaCircular2{
    public static void main(String[] args) {
       Scanner owl=new Scanner(System.in);
       Cqueue queue=null;   
@@ -9,7 +10,8 @@ class ColaCircular{
          System.out.print("\nCola circular.\n"+
                           "1. Crear Cola.\n"+
                           "2. Ingresar elemento.\n"+
-                          "3. Ver cola.\n"+
+                          "3. Eliminar primero.\n"+
+                          "4. Ver cola.\n"+
                           "0. Salir.\n  Opcion: ");mm=owl.nextInt();
          switch (mm) {
             case 1:
@@ -37,10 +39,14 @@ class ColaCircular{
                }
                break;
             case 3:
+               System.out.println("-Se elimino elemento-\n");
+               queue.Pop();
+               break;
+            case 4:
                queue.peek();
                break;
 
-            case 0:
+            case 0:           
                break;
             default:
                System.out.println("Ingrese una opcion valida...\n");
@@ -53,30 +59,49 @@ class ColaCircular{
 
 class Cqueue{
    private int [] queue = new int[5];
-   private int val=0, in=0, ou=1; 
-   boolean tt=false;
+   private int x=0, y=0; 
+   boolean tt=false,f=true;
 
    public void push(int val){
-      this.val=val;
       if (val!= 0) {
          if (tt==true) {
             System.out.println("Cola llena... \n");
          } else {                    
-            queue[ou]=val;       
-            ou++;
-            if(ou>4)
-               ou=0; 
-            if(in==ou-1)
-                  tt=true; 
+        	 
+        	queue[x]=val;  
+            x++;
+            if(x>4)
+                x=0;            
+            if((x==y)&&(f==false))
+               tt=true;
+            f=false;
          }
-                    
       }else
          System.out.println("Asegurese de ingresar elementos diferentes de 0...\n");         
+   }
+
+   public void Pop(){
+      if (x==y&&f==true) {
+         System.out.println("Cola vacia...\n");
+      } else {
+            if(y>4){
+                  y=0;
+            }
+            if(y==x)
+                  tt=true;
+            }
+
+            queue[y]=0;
+            
+            y++;
+            if(x!=y) {
+            	tt=false;
+            }
    }
 
    public void peek(){
       for (int i = 0; i < queue.length; i++) {
          System.out.print(queue[i] + " ");
-      }
+      }     
    }
 }
