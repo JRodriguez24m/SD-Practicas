@@ -48,6 +48,7 @@ class proy{
                 "\n   1. Bubble Sort."+
                 "\n   2. Quick Sort."+
                 "\n   3. Merge Sort."+
+                "\n   4. Shell Sort."+
                 "\n   0. Regresar.\n    Opción: ");
                 oo=owl.nextInt();
 
@@ -75,7 +76,8 @@ class proy{
                         System.out.println("    -Vector ordenado-\n");
                         Ordenar.Mostrar(vector2);
                     break;
-                    case 3:
+
+                    case 3:                    
                         a=System.nanoTime();
                         vector3=Ordenar.MergeSort(vector3);
                         b=System.nanoTime();
@@ -84,6 +86,17 @@ class proy{
                         System.out.println("    -Vector ordenado-\n");
                         Ordenar.Mostrar(vector2);
                     break;
+
+                    case 4:                    
+                    a=System.nanoTime();
+                    Ordenar.SHell(vector4);
+                    b=System.nanoTime();
+                    tiempo=(double)(b-a)*1e-9;
+                    System.out.println("\n\n ---TIEMPO DE EJECUCION -- SHell Sort: "+tiempo+" Segundos");
+                    System.out.println("    -Vector ordenado-\n");
+                    Ordenar.Mostrar(vector2);
+                    break;
+
                 }
 
 
@@ -156,50 +169,76 @@ class ordena{
         } while (i<=j);
     }
 
-    public int [] MergeSort(int [] vec){
+    public int [] MergeSort(int [] vec){    
+        int i,j,k;   
+        if(vec.length>1){
+            int nIzq=vec.length/2,nDer=vec.length-nIzq;
 
-        int i,j,k,nIzq=vec.length/2,nDer=vec.length-nIzq;
+            int vIzq[]=new int[nIzq];
+            int vDer[]=new int [nDer];
 
-        int vIzq[]=new int[nIzq];
-        int vDer[]=new int [nDer];
+            for ( i = 0; i < nIzq; i++) {
+                vIzq[i]=vec[i];
+            }
 
-        for ( i = 0; i < nIzq; i++) {
-            vIzq[i]=vec[i];
-        }
+            for ( i = nIzq; i < nIzq+nDer; i++) {
+                vDer[i-nIzq]=vec[i];
+            }      
+            
+            vIzq=MergeSort(vIzq);
+            vDer=MergeSort(vDer);
 
-        for ( i = nIzq; i < nIzq+nDer; i++) {
-            vDer[i-nIzq]=vec[i];
-        }      
+            //i para el original, j para el izq, k para el derecho
+            i=j=k=0;
 
-        vIzq=MergeSort(vIzq);
-        vDer=MergeSort(vDer);
-
-        //i para el original, j para el izq, k para el derecho
-        i=j=k=0;
-
-        while (vIzq.length!=j&&vDer.length!=k) {
-            if(vIzq[j]<vDer[k]){
-                vec[i]=vIzq[k];
+            while (vIzq.length!=j&&vDer.length!=k) {
+                if(vIzq[j]<vDer[k]){
+                    vec[i]=vIzq[j];
+                    i++;
+                    j++;
+                }else{
+                    vec[i]=vDer[k];
+                    i++;
+                    k++;
+                }
+            }
+            //se empieza a llenar el arreglo final pasando la parte izquierda
+            while(vIzq.length!=j){
+                vec[i]=vIzq[j];
                 i++;
                 j++;
-            }else{
+            }
+            //se  pasa la parte derecha al arreglo final
+            while (vDer.length!=k) {
                 vec[i]=vDer[k];
                 i++;
                 k++;
             }
         }
-        //se empieza a llenar el arreglo final pasando la parte izquierda
-        while(vIzq.length!=j){
-            vec[i]=vIzq[j];
-            i++;
-            j++;
-        }
-        //se  pasa la parte derecha al arreglo final
-        while (vDer.length!=k) {
-            vec[i]=vDer[k];
-            i++;
-            k++;
-        }
+        
         return vec;        
+    }
+
+    public void SHell(int [] vec){
+        int dist,aux,i,j,k;
+        dist=vec.length/2;
+        while (dist>0) {
+            for(i =dist; i<vec.length; i++){
+                j=i-dist;
+                while (j>=0) {
+                    k=j+dist;
+                    if (vec[j]<=vec[k])
+                        j=-24;
+                        else{
+                        aux=vec[j];
+                        vec[j]=vec[k];
+                        vec[k]=aux;
+                        j=j-dist;
+                    }
+                }
+            }
+            dist=dist/2;
+        }
+
     }
 }
