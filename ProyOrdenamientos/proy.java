@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 class proy{
-   public static void llenar(int [] vec,int [] vec2, int [] vec3, int [] vec4){
+   public static void llenar(int [] vec,int [] vec2, int [] vec3, int [] vec4, int [] vec5){
        System.out.println("    -Vector generado-    \n");
       for (int i = 0; i < vec.length; i++) {
-         vec[i]=vec2[i]=vec3[i]=vec4[i]=(int)(Math.random() * 999)+1;
+         vec[i]=vec2[i]=vec3[i]=vec4[i]=vec5[i]=(int)(Math.random() * 999)+1;
          System.out.print(" "+vec[i]);
       }
    }
@@ -17,6 +17,7 @@ class proy{
      int[]vector2=null;
      int[]vector3=null;
      int[]vector4=null;
+     int[]vector5=null;
      boolean ff=false;
      long a,b;
      double tiempo;
@@ -31,6 +32,7 @@ class proy{
            switch (o) {
             case 0:
                 ff=true;
+                owl.close();
             break;
 
             case 1:
@@ -40,7 +42,8 @@ class proy{
                 vector2=new int[n];
                 vector3=new int[n];
                 vector4=new int[n];
-                llenar(vector,vector2,vector3,vector4);
+                vector5=new int[n];
+                llenar(vector,vector2,vector3,vector4,vector5);
             break;
 
             case 2:
@@ -49,6 +52,7 @@ class proy{
                 "\n   2. Quick Sort."+
                 "\n   3. Merge Sort."+
                 "\n   4. Shell Sort."+
+                "\n   5. Insertion Sort"+
                 "\n   0. Regresar.\n    Opción: ");
                 oo=owl.nextInt();
 
@@ -84,7 +88,7 @@ class proy{
                         tiempo=(double)(b-a)*1e-9;
                         System.out.println("\n\n ---TIEMPO DE EJECUCION -- Merge Sort: "+tiempo+" Segundos");
                         System.out.println("    -Vector ordenado-\n");
-                        Ordenar.Mostrar(vector2);
+                        Ordenar.Mostrar(vector3);
                     break;
 
                     case 4:                    
@@ -94,7 +98,17 @@ class proy{
                     tiempo=(double)(b-a)*1e-9;
                     System.out.println("\n\n ---TIEMPO DE EJECUCION -- SHell Sort: "+tiempo+" Segundos");
                     System.out.println("    -Vector ordenado-\n");
-                    Ordenar.Mostrar(vector2);
+                    Ordenar.Mostrar(vector4);
+                    break;
+
+                    case 5:                    
+                    a=System.nanoTime();
+                    Ordenar.insercion(vector5);
+                    b=System.nanoTime();
+                    tiempo=(double)(b-a)*1e-9;
+                    System.out.println("\n\n ---TIEMPO DE EJECUCION -- Inserción Sort: "+tiempo+" Segundos");
+                    System.out.println("    -Vector ordenado-\n");
+                    Ordenar.Mostrar(vector5);
                     break;
 
                 }
@@ -239,6 +253,18 @@ class ordena{
             }
             dist=dist/2;
         }
+    }
 
+    public void insercion(int [] vec){
+        int aux,i,j;
+        for(i=1;i<vec.length;i++){
+            aux=vec[i];
+            j=i-1;
+            while (j>=0&&vec[j]>aux) {
+                vec[j+1]=vec[j];
+                j--;
+            }
+            vec[j+1]=aux;
+        }
     }
 }
