@@ -47,6 +47,7 @@ class proy{
                 System.out.print("\n\n    --ORDENAR-\n"+
                 "\n   1. Bubble Sort."+
                 "\n   2. Quick Sort."+
+                "\n   3. Merge Sort."+
                 "\n   0. Regresar.\n    Opción: ");
                 oo=owl.nextInt();
 
@@ -60,7 +61,7 @@ class proy{
                         Ordenar.BubbleSort(vector);
                         b=System.nanoTime();
                         tiempo=(double)(b-a)*1e-9;
-                        System.out.println("\n\n ---TIEMPO DE EJECUCION -- Bubble Sort: "+tiempo);
+                        System.out.println("\n\n ---TIEMPO DE EJECUCION -- Bubble Sort: "+tiempo+" Segundos");
                         System.out.println("    -Vector ordenado-\n");
                         Ordenar.Mostrar(vector);                        
                     break;
@@ -70,7 +71,16 @@ class proy{
                         Ordenar.Qsort(vector2, 0, vector2.length-1);
                         b=System.nanoTime();
                         tiempo=(double)(b-a)*1e-9;
-                        System.out.println("\n\n ---TIEMPO DE EJECUCION -- QuickSort: "+tiempo);
+                        System.out.println("\n\n ---TIEMPO DE EJECUCION -- Quick Sort: "+tiempo+" Segundos");
+                        System.out.println("    -Vector ordenado-\n");
+                        Ordenar.Mostrar(vector2);
+                    break;
+                    case 3:
+                        a=System.nanoTime();
+                        vector3=Ordenar.MergeSort(vector3);
+                        b=System.nanoTime();
+                        tiempo=(double)(b-a)*1e-9;
+                        System.out.println("\n\n ---TIEMPO DE EJECUCION -- Merge Sort: "+tiempo+" Segundos");
                         System.out.println("    -Vector ordenado-\n");
                         Ordenar.Mostrar(vector2);
                     break;
@@ -144,5 +154,52 @@ class ordena{
                 Qsort(vec, i, b);
             }
         } while (i<=j);
+    }
+
+    public int [] MergeSort(int [] vec){
+
+        int i,j,k,nIzq=vec.length/2,nDer=vec.length-nIzq;
+
+        int vIzq[]=new int[nIzq];
+        int vDer[]=new int [nDer];
+
+        for ( i = 0; i < nIzq; i++) {
+            vIzq[i]=vec[i];
+        }
+
+        for ( i = nIzq; i < nIzq+nDer; i++) {
+            vDer[i-nIzq]=vec[i];
+        }      
+
+        vIzq=MergeSort(vIzq);
+        vDer=MergeSort(vDer);
+
+        //i para el original, j para el izq, k para el derecho
+        i=j=k=0;
+
+        while (vIzq.length!=j&&vDer.length!=k) {
+            if(vIzq[j]<vDer[k]){
+                vec[i]=vIzq[k];
+                i++;
+                j++;
+            }else{
+                vec[i]=vDer[k];
+                i++;
+                k++;
+            }
+        }
+        //se empieza a llenar el arreglo final pasando la parte izquierda
+        while(vIzq.length!=j){
+            vec[i]=vIzq[j];
+            i++;
+            j++;
+        }
+        //se  pasa la parte derecha al arreglo final
+        while (vDer.length!=k) {
+            vec[i]=vDer[k];
+            i++;
+            k++;
+        }
+        return vec;        
     }
 }
