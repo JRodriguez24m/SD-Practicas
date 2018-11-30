@@ -2,13 +2,20 @@ import java.util.Scanner;
 
 class proy{
     //método para llenar los vectores e imprimir el que se genero
-   public static void llenar(int [] vec,int [] vec2, int [] vec3, int [] vec4, int [] vec5){
+   public static void llenar(int [] vec,int [] vec2, int [] vec3, int [] vec4, int [] vec5,int vec24 []){
        System.out.println("    -Vector generado-    \n");
       for (int i = 0; i < vec.length; i++) {
           //El vector se generara con numeros de 1 a 505
-         vec[i]=vec2[i]=vec3[i]=vec4[i]=vec5[i]=(int)(Math.random() * 505)+1;
+         vec[i]=vec2[i]=vec3[i]=vec4[i]=vec5[i]=vec24[i]=(int)(Math.random() * 505)+1;
          System.out.print(vec[i]+", ");
       }
+   }
+   public static void copiar(int [] vec,int [] vec2, int [] vec3, int [] vec4, int [] vec5,int vec24 []){
+    for (int i = 0; i < vec.length; i++) {
+        //copia los datos del vector24 a los otos
+       vec[i]=vec2[i]=vec3[i]=vec4[i]=vec5[i]=vec24[i];
+       
+    }
    }
    public static void main(String[] args) {
 
@@ -22,6 +29,7 @@ class proy{
      int[]vector3=null;
      int[]vector4=null;
      int[]vector5=null;
+     int [] vector24=null;
      //variable booleana para salir
      boolean ff=false;
      //variables para medir los tiempos de ejecucion
@@ -48,12 +56,16 @@ class proy{
                 vector3=new int[n];
                 vector4=new int[n];
                 vector5=new int[n];
+                vector24=new int [n];
                 //se manda a llamar el metodo llenar
-                llenar(vector,vector2,vector3,vector4,vector5);
+                llenar(vector,vector2,vector3,vector4,vector5,vector24);
             break;
             //En el caso 2 se mandan a llamar todos los metodos de ordenamiento y se toman tiempos
             case 2:
+            for(int prueba=0;prueba<10;prueba++){
                 //Comprueba si  existe un vetor primero 
+                llenar(vector,vector2,vector3,vector4,vector5,vector24);
+                double prom=0,prom2=0,prom3=0,prom4=0,prom5=0;
                 if(vector!=null){
                     //variable a1 para el tomar el inicio del tiempo
                     long a=System.nanoTime();    
@@ -106,19 +118,40 @@ class proy{
                     System.out.println("\n\n\n----Tiempos----");  
                     //ciclo for para mostrar los tiempos en orden acendente              
                     for (int i = 0; i < reine.length; i++) {
-                        System.out.print("--"+(i+1));
-                        if(reine[i]==tBubble){System.out.print(". burbuja");}                        
-                        if(reine[i]==tInsert){System.out.print(". Insercion");}                        
-                        if(reine[i]==tMerge){System.out.print(". MErge");}                        
-                        if(reine[i]==tQ){System.out.print(". quick");}                        
-                        if(reine[i]==tSH){System.out.print(". shell");}
-                        System.out.print(" con "+reine[i]+"s.\n ");                    
+                        System.out.print("  "+(i+1));
+                        if(reine[i]==tBubble){System.out.print(". Burbuja");}                        
+                        if(reine[i]==tInsert){System.out.print(". Inserción");}                        
+                        if(reine[i]==tMerge){System.out.print(". Merge");}                        
+                        if(reine[i]==tQ){System.out.print(". Quick");}                        
+                        if(reine[i]==tSH){System.out.print(". Shell");}
+                        System.out.print(" con "+reine[i]+"s.\n "); 
+                        prom=(prom+tBubble)/2;      
+                        prom2=(prom2+tInsert)/2; 
+                        prom3=(prom3+tMerge)/2; 
+                        prom4=(prom4+tQ)/2; 
+                        prom5=(prom5+tSH)/2; 
+
+                    }
+                    //se calculan los promedios del tiempo de cada vector
+                    double promedios[]={prom,prom2,prom3,prom4,prom5};
+                    Ordenar.b(promedios);
+                    System.out.println("\n\n***Promedios***\n");
+                    for (int i = 0; i < promedios.length; i++) {
+                        System.out.print("  "+(i+1));
+                        if(promedios[i]==prom){System.out.print(". Burbuja");}                        
+                        if(promedios[i]==prom2){System.out.print(". Inserción");}                        
+                        if(promedios[i]==prom3){System.out.print(". Merge");}                        
+                        if(promedios[i]==prom4){System.out.print(". Quick");}                        
+                        if(promedios[i]==prom5){System.out.print(". Shell");}
+                        System.out.print(" con "+promedios[i]+"s.\n "); 
+                        
+
                     }
                 }else{
                     System.out.println("\n----Cree un vector primero----\n");
                 }
 
-
+            }
             break;
                   
             
