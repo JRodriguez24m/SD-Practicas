@@ -53,75 +53,80 @@ class proy{
             break;
             //En el caso 2 se mandan a llamar todos los metodos de ordenamiento y se toman tiempos
             case 2:
-                //variable a1 para el tomar el inicio del tiempo
-                long a1=System.nanoTime();    
-                Ordenar.BubbleSort(vector);
-                //variable b1 para tomar el tiempo final
-                long b1=System.nanoTime();
-                //se realiza la diferencia entre los tiempos, se multiplica por 1e-9 para convertir los
-                //nanosegundos a segundos
-                tBubble=(double)(b1-a1)*1e-9;
-                System.out.println("\n\n ---TIEMPO DE EJECUCION -- Bubble Sort: "+tBubble+" Segundos");
-                System.out.println("    -Vector ordenado-\n");
-                Ordenar.Mostrar(vector);                        
-                // se repite el proceso para los otros metodos  
-                long a2=System.nanoTime();
-                Ordenar.Qsort(vector2, 0, vector2.length-1);
-                long b2=System.nanoTime();
-                tQ=(double)(b2-a2)*1e-9;
-                System.out.println("\n\n ---TIEMPO DE EJECUCION -- Quick Sort: "+tQ+" Segundos");
-                System.out.println("    -Vector ordenado-\n");
-                Ordenar.Mostrar(vector2);                
+                //Comprueba si  existe un vetor primero 
+                if(vector!=null){
+                    //variable a1 para el tomar el inicio del tiempo
+                    long a=System.nanoTime();    
+                    Ordenar.BubbleSort(vector);
+                    //variable b1 para tomar el tiempo final
+                    long b=System.nanoTime(); 
+                    //se realiza la diferencia entre los tiempos, se multiplica por 1e-9 para convertir los
+                    //nanosegundos a segundos
+                    tBubble=(double)(b-a)*1.0e-9;
+                    System.out.println("\n\n ---TIEMPO DE EJECUCION -- Bubble Sort: "+tBubble+" Segundos");
+                    System.out.println("    -Vector ordenado-\n");
+                    Ordenar.Mostrar(vector);                        
+                    // se repite el proceso para los otros metodos  
+                    a=System.nanoTime();
+                    Ordenar.Qsort(vector2, 0, vector2.length-1);
+                    b=System.nanoTime(); 
+                    tQ=(double)(b-a)*1.0e-9;
+                    System.out.println("\n\n ---TIEMPO DE EJECUCION -- Quick Sort: "+tQ+" Segundos");
+                    System.out.println("    -Vector ordenado-\n");
+                    Ordenar.Mostrar(vector2);                
+                    
+                    a=System.nanoTime();
+                    vector3=Ordenar.MergeSort(vector3);
+                    b=System.nanoTime();
+                    tMerge=(double)(b-a)*1.0e-9;
+                    System.out.println("\n\n ---TIEMPO DE EJECUCION -- Merge Sort: "+tMerge+" Segundos");
+                    System.out.println("    -Vector ordenado-\n");
+                    Ordenar.Mostrar(vector3);
                 
-                long a3=System.nanoTime();
-                vector3=Ordenar.MergeSort(vector3);
-                long b3=System.nanoTime();
-                tMerge=(double)(b3-a3)*1e-9;
-                System.out.println("\n\n ---TIEMPO DE EJECUCION -- Merge Sort: "+tMerge+" Segundos");
-                System.out.println("    -Vector ordenado-\n");
-                Ordenar.Mostrar(vector3);
-               
-                                  
-                long a4=System.nanoTime();
-                Ordenar.SHell(vector4);
-                long b4=System.nanoTime();
-                tSH=(double)(b4-a4)*1e-9;
-                System.out.println("\n\n ---TIEMPO DE EJECUCION -- SHell Sort: "+tSH+" Segundos");
-                System.out.println("    -Vector ordenado-\n");
-                Ordenar.Mostrar(vector4);
-            
-                long a5=System.nanoTime();
-                Ordenar.insercion(vector5);
-                long b5=System.nanoTime();
-                tInsert=(double)(b5-a5)*1e-9;
-                System.out.println("\n\n ---TIEMPO DE EJECUCION -- Inserción Sort: "+tInsert+" Segundos");
-                System.out.println("    -Vector ordenado-\n");
-                Ordenar.Mostrar(vector5);
-                // se crea el vector reine para almacenar los tiempos
-                double  reine[]={tBubble,tInsert,tMerge,tQ,tSH};
-                //se ordenan los tiempos de menor a myor
-                Ordenar.b(reine);
-                System.out.println("\n\n\n----Tiempos----");  
-                //ciclo for para mostrar los tiempos en orden acendente              
-                for (int i = 0; i < reine.length; i++) {
-                    System.out.print("--"+(i+1));
-                    if(reine[i]==tBubble){System.out.print(". burbuja");}                        
-                    if(reine[i]==tInsert){System.out.print(". Insercion");}                        
-                    if(reine[i]==tMerge){System.out.print(". MErge");}                        
-                    if(reine[i]==tQ){System.out.print(". quick");}                        
-                    if(reine[i]==tSH){System.out.print(". shell");}
-                    System.out.print(" con "+reine[i]+"s.\n ");                    
-                 }
+                                    
+                    a=System.nanoTime();
+                    Ordenar.SHell(vector4);
+                    b=System.nanoTime(); 
+                    tSH=(double)(b-a)*1.0e-9;
+                    System.out.println("\n\n ---TIEMPO DE EJECUCION -- SHell Sort: "+tSH+" Segundos");
+                    System.out.println("    -Vector ordenado-\n");
+                    Ordenar.Mostrar(vector4);
+                
+                    a=System.nanoTime();
+                    Ordenar.insercion(vector5);
+                    b=System.nanoTime(); 
+                    tInsert=(double)(b-a)*1.0e-9;
+                    System.out.println("\n\n ---TIEMPO DE EJECUCION -- Inserción Sort: "+tInsert+" Segundos");
+                    System.out.println("    -Vector ordenado-\n");
+                    Ordenar.Mostrar(vector5);
+                    // se crea el vector reine para almacenar los tiempos
+                    double  reine[]={tBubble,tInsert,tMerge,tQ,tSH};
+                    //se ordenan los tiempos de menor a myor
+                    Ordenar.b(reine);
+                    System.out.println("\n\n\n----Tiempos----");  
+                    //ciclo for para mostrar los tiempos en orden acendente              
+                    for (int i = 0; i < reine.length; i++) {
+                        System.out.print("--"+(i+1));
+                        if(reine[i]==tBubble){System.out.print(". burbuja");}                        
+                        if(reine[i]==tInsert){System.out.print(". Insercion");}                        
+                        if(reine[i]==tMerge){System.out.print(". MErge");}                        
+                        if(reine[i]==tQ){System.out.print(". quick");}                        
+                        if(reine[i]==tSH){System.out.print(". shell");}
+                        System.out.print(" con "+reine[i]+"s.\n ");                    
+                    }
+                }else{
+                    System.out.println("\n----Cree un vector primero----\n");
+                }
 
 
             break;
                   
             
-              default:
-                  System.out.println(" \n-Ingese  una opcion valida...");
-                 break;
+            default:
+                System.out.println(" \n-Ingese  una opcion valida...");
+            break;
                
-           }
+           }           
         } catch (Exception e) {
            System.out.println("\n -Intente de nuevo. Caracter no valido...\n\n") ;
            owl.next();
@@ -132,18 +137,21 @@ class proy{
 
 class ordena{
     
-    
+    //Metodo para mostrar los arreglos
     public void Mostrar(int [] vec){
        for (int i = 0; i < vec.length; i++) {
           System.out.print(vec[i]+", ");
        }
     }
 
+    //Primer metodo de ordenamiento- burbuja
     public void BubbleSort(int[]vec){
-        
+        //variable auxiliar para hacer el cambio
         int aux;
         for (int i = 0; i < vec.length; i++) {
             for (int j = i + 1; j < vec.length; j++) {
+                /*Condicion para hacer el cambio, si el numero que se encuentra en la posicion i
+                es mayor al que esta en la posicion j se hace el cambio*/
                 if(vec[i]>vec[j]){
                     aux=vec[i];
                     vec[i]=vec[j];
@@ -154,7 +162,8 @@ class ordena{
         
     }
 
-
+    /*Segundo metod burbuja, este de tipo double, que recibira los tiempos de los metodos
+    para ordenarlos */
     public void b(double[]vec){
         
         double aux;
@@ -171,62 +180,91 @@ class ordena{
     }
 
     
-
+    /*Segundo metodo de ordenamiento, Quick, recibira el vector y los indices a y b, que seran 
+    primero y ultimo respectivamente */
     public void Qsort(int [] vec,int a, int b){
-        int aux,i=a,j=b,pivote=vec[(a+b)/2];
 
+        /*Se crea la variable auxiliar para hacer los cambios, el pivote que estara lo mas cerca a la mitad
+        y las variables i y j que se les asignaran los valores de a y b respectivamente */
+        int aux,i=a,j=b,pivote=vec[(a+b)/2];
+        //inicio del ciclo do-while que se epetira mientras i sea menor o igual a j
         do {
+            //Ciclo while para aumentar el indie i, siempre y cuando el numero que este en la posicion
+            //i sea menor al numero que este en el pivote.
             while(vec[i]<pivote){
                 i++;
             }
+            /*en este ciclo se disminuira j siempre y cuando el numero que este en la posicion j
+            sea mayor al que este en la posicion pivote. */
             while(vec[j]>pivote){
                 j--;
             }
-
+            /* Condicion para realizar el cambio, cuando el numero en i sea menor o igual
+            al que esta en j, de esta manera se enviaran los numeros mayores a la derecha y los
+            menores a la izquierda*/
             if(i<=j){
                 aux=vec[i];
                 vec[i]=vec[j];
                 vec[j]=aux;
+                //una vez realizado el cambio los indices avanzan 1
                 i++;
                 j--;
             }
-
-            if(a<j){
-                Qsort(vec, a, j);
-            }
-            if(i<b){
-                Qsort(vec, i, b);
-            }
+            
+            
         } while (i<=j);
+
+        /*se manda a llamar este mismo metodo para ordenar el lado izquierdo y derecho, creando nuevos pivotes
+        e indices para ser ordenados*/
+        if(a<j){
+            Qsort(vec, a, j);
+        }
+        if(i<b){
+            Qsort(vec, i, b);
+        }
     }
 
+    //Metodo de ordenamiento merge recibira un vector y lo retornara ordenado
     public int [] MergeSort(int [] vec){    
+        //se crean los indices i, j y k, para el vector principa y izquierdo y el derecho respectivamente
         int i,j,k;   
+        //se realizara una comprobacion, ya se se estara subdividiendo en diferentes vectores
+        //se realizara el ordenamiento siempre y cuando el vector sea mayoy a 1, de lo contrario
+        //ya estara ordenado
         if(vec.length>1){
+            // se toman la medidas, para crear los vectores izquierdo y derecho
             int nIzq=vec.length/2,nDer=vec.length-nIzq;
 
             int vIzq[]=new int[nIzq];
             int vDer[]=new int [nDer];
 
+            //ciclo para copiar los valores del  original al izquierdo
             for ( i = 0; i < nIzq; i++) {
                 vIzq[i]=vec[i];
             }
 
+            //se copian los valores del original al derecho
             for ( i = nIzq; i < nIzq+nDer; i++) {
                 vDer[i-nIzq]=vec[i];
             }      
             
+            //se manda a llamar este mismo metodo hasta que los elementos queden individuales.
             vIzq=MergeSort(vIzq);
             vDer=MergeSort(vDer);
 
-            //i para el original, j para el izq, k para el derecho
+            //se igualan los indicies a 0, con i para el original, j para el izquierdo, k para el derecho
             i=j=k=0;
-
+            //ciclo while para realizar la mezcla, con un ciclo while que se recorrera
+            /*siempre y cuando la longitud de vector izquierdo sea diferente a j y 
+            la longitud del vector derecho sea diferente de k*/
             while (vIzq.length!=j&&vDer.length!=k) {
+                /*se asignara lo que este en la posicion i al vector izquierdo en j siempre y cuando
+                lo que este en la posicion  j del izq sea menor alo que este en la posicion k del derecho */
                 if(vIzq[j]<vDer[k]){
                     vec[i]=vIzq[j];
                     i++;
                     j++;
+                //si ees menor se realiza lo contrario
                 }else{
                     vec[i]=vDer[k];
                     i++;
@@ -249,38 +287,59 @@ class ordena{
         
         return vec;        
     }
-
+    //método shell
     public void SHell(int [] vec){
+        //variable dist que sera la distancia con la que se compararan los elementos
+        //auxiliar para realizar el cambio y los indices i, j y k que son los que se compararan
         int dist,aux,i,j,k;
         dist=vec.length/2;
+        //ciclo while que se repetira hasta que la distancia sea 0
         while (dist>0) {
+            //ciclo for para recorrer la distancia con que se comparan los elementos            
             for(i =dist; i<vec.length; i++){
+                //se asigna a la distancia variable j con la que se comparara i
                 j=i-dist;
+                //ciclo while, que se recorrera cuando j sea mayor o igual a 0
                 while (j>=0) {
                     k=j+dist;
-                    if (vec[j]<=vec[k])
+                    //condicion para realizar el ordenamiento
+                    //si el elemento de la posicion j es menor al de k se asigna un valor menor 
+                    //a 0 para que ya no se repita el ciclo while.
+                    if (vec[j]<=vec[k]){
                         j=-24;
-                        else{
+                    }else{
+                        //
                         aux=vec[j];
                         vec[j]=vec[k];
                         vec[k]=aux;
                         j=j-dist;
+                    
                     }
                 }
             }
+            //se acorta la distancia
             dist=dist/2;
         }
     }
 
+    //metodo de insercion
     public void insercion(int [] vec){
+        //indices i y j ara realizar comparaciones y variale aux para realizar los cambios
         int aux,i,j;
+        //ciclo que recorrera el vector desde la posicion 1 
         for(i=1;i<vec.length;i++){
+            //se guardara el elemento de la posicion i en la variable auxiliar
             aux=vec[i];
+            //se asigna al indice j una posicion antes del indice i 
             j=i-1;
+            // Se recorrera este ciclo para realizar comprobaciones con los elementos anteriores*/
             while (j>=0&&vec[j]>aux) {
+                //se asigna el elemento en nla posicion j+1 en la posicion j
                 vec[j+1]=vec[j];
+                
                 j--;
             }
+            //se asignara elemento alamcenado en la posicion j+1
             vec[j+1]=aux;
         }
     }
