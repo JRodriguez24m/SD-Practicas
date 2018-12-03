@@ -1,116 +1,109 @@
-import java.util.*;
+import java.util.Scanner;
 
 class MergeSort{
+   public static void llenar(int [] vec){
+       System.out.println("    -Vector generado-    \n");
+      for (int i = 0; i < vec.length; i++) {
+         vec[i]=(int)(Math.random() * 505)+1;
+         System.out.print(vec[i]+", ");
+      }
+   }
    public static void main(String[] args) {
-      Scanner owl= new Scanner(System.in);
-      merge lizard=new merge();
-      int x=0,op=0;
-      int [] a=null;
 
-         do {
-            System.out.print("\n\n\n\n Ordenamiento método merge\n"+
-         "  1. Ingresar/modificar tamaño\n"+
-         "  2. Ingresar datos\n"+
-         "  3. ver\n"+
-         "  4. Ordenar\n"+
-         "  0. Salir\n    Opción: ");
-         op=owl.nextInt();
-         switch (op) {
-            case 1:
-               System.out.print("\n   -Ingrese el tamaño: ");
-               x=owl.nextInt();
-               a=new int [x];
-               break;
-
-            case 2:
-            if (a!=null){
-               for (int i = 0; i < a.length; i++) {
-                  a[i]=(int)(Math.random()*15+5);
-               }
-               System.out.println("   -Vector generado\n");
-               lizard.mostrar(a);
-
-             }else {
-               System.out.println(" - Genere un vector primero. \n\n");
-             }
-               break;
-            case 3:
-               lizard.mostrar(a);
-               break;
-
-            case 4:
-            if(a!=null){
-              lizard.sort(a);
-
-            }else{
-              System.out.println(" - Genere un vector primero. \n\n");
-            }
-
-               break;
-
+     Scanner owl = new Scanner(System.in);
+     ordena Ordenar=new ordena();
+     int o,n=0;
+     int[]vector=null;
+     boolean ff=false;
+     do {
+        try {
+           System.out.print("\n\n\n\n    -Merge Sort-\n"+
+           "\n 1. Generar vector."+
+           "\n 2. Ordenar."+
+           "\n 0. Salir.\n    Opción: ");
+           o=owl.nextInt();
+           switch (o) {
             case 0:
-            System.out.println(" . . .\n\n");
-            owl.close();
-               break;
+                ff=true;
+                owl.close();
+            break;
+            case 1:
+                System.out.print("      -Ingrese el tamaño del vector: ");
+                n=owl.nextInt();
+                vector=new int[n];
+                llenar(vector);
+            break;
+            case 2:
+                
+                if(vector!=null){
+                    Ordenar.MergeSort(vector);
+                    System.out.println("    -Vector ordenado-\n");
+                    Ordenar.Mostrar(vector);                
+                    
+                }else{
+                    System.out.println("\n----Cree un vector primero----\n");
+                }
+            break;
+                  
+            
             default:
-               break;
-         }
-         } while (op!=0);
-
+                System.out.println(" \n-Ingese  una opcion valida...");
+            break;
+               
+           }           
+        } catch (Exception e) {
+           System.out.println("\n -Intente de nuevo. Caracter no valido...\n\n") ;
+           owl.next();
+        }
+     } while (!ff);
    }
 }
 
-class merge{
-   int i=0,j=0,k=0;
-
-   public int [] sort(int [] a){
-     if (a.length>  1){
-       int nIzq=a.length/2, nDer=a.length-nIzq;
-        int aIzq[]=new int[nIzq];
-        int aDer[]=new int[nDer];
-        // se inserta la parte izq en su arreglo
-        for ( i = 0; i < nIzq; i++) {
-          aIzq[i]=a[i];
-
-        }
-        //se inserta en el derecho
-        for (i = nIzq; i < (nIzq+nDer); i++) {
-          aDer[i-nIzq]=a[i];
-        }
-
-        aIzq=sort(aIzq);
-        aDer=sort(aDer);
-
-        i=j=k=0;
-
-        while(aIzq.length !=j && aDer.length !=k ){
-          if(aDer[j]<aDer[k]){
-            a[i]=aIzq[j];
-            i++;
-            j++;
-          }else{
-            a[i]=aDer[k];
-            i++;
-            k++;
+class ordena{
+    public void Mostrar(int [] vec){
+       for (int i = 0; i < vec.length; i++) {
+          System.out.print(vec[i]+", ");
+       }
+    }
+    public int [] MergeSort(int [] vec){    
+      int i,j,k;   
+      if(vec.length>1){
+          int nIzq=vec.length/2,nDer=vec.length-nIzq;
+          int vIzq[]=new int[nIzq];
+          int vDer[]=new int [nDer];
+          for ( i = 0; i < nIzq; i++) {
+              vIzq[i]=vec[i];
           }
-        }
-        //vector final
-        while(aIzq.length != j){
-          a[i]=aIzq[j];
-          i++;
-          j++;
-        }
-        while(aDer.length != k){
-          a[i]=aDer[k];
-          i++;
-          k++;
-        }
-     }
-     return a;
-   }
-   public void mostrar (int [] a){
-      for (int s = 0; s < a.length; s++) {
-         System.out.print(" "+a[s]);
+          for ( i = nIzq; i < nIzq+nDer; i++) {
+              vDer[i-nIzq]=vec[i];
+          }      
+          vIzq=MergeSort(vIzq);
+          vDer=MergeSort(vDer);
+          i=j=k=0;
+          while (vIzq.length!=j&&vDer.length!=k) {
+              if(vIzq[j]<vDer[k]){
+                  vec[i]=vIzq[j];
+                  i++;
+                  j++;
+              }else{
+                  vec[i]=vDer[k];
+                  i++;
+                  k++;
+              }
+          }
+          while(vIzq.length!=j){
+              vec[i]=vIzq[j];
+              i++;
+              j++;
+          }
+          while (vDer.length!=k) {
+              vec[i]=vDer[k];
+              i++;
+              k++;
+          }
       }
-   }
+      return vec;        
+  }
+
+
 }

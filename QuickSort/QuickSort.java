@@ -1,85 +1,93 @@
-import java.util.*;
+import java.util.Scanner;
 
 class QuickSort{
+   public static void llenar(int [] vec){
+       System.out.println("    -Vector generado-    \n");
+      for (int i = 0; i < vec.length; i++) {
+         vec[i]=(int)(Math.random() * 505)+1;
+         System.out.print(vec[i]+", ");
+      }
+   }
    public static void main(String[] args) {
-      Scanner owl= new Scanner(System.in);
-      ordena bo=new ordena();
-      int x=0,op=0;
-      
-      int [] a=null;
-      
-         do {
-            System.out.print("\n\n\n\n Ordenamiento método de la burbuja\n"+
-         "  1. IngQuickSortresar/modificar tamaño\n"+
-         "  2. Ingresar datos\n"+
-         "  3. ver\n"+
-         "  4. Ordenar\n"+
-         "  0. Salir\n    Opción: "); 
-         op=owl.nextInt();
-         switch (op) {
-            case 1:
-               System.out.print("\n   -Ingrese el tamaño: "); x=owl.nextInt();
-               a=new int [x];
-               break;
 
-            case 2:
-               for (int i = 0; i < a.length; i++) {
-                  a[i]=(int)(Math.random()*15+5);
-               }
-               System.out.println("   -Vector generado\n");
-               bo.mostrar(a);
-               break;
-            case 3:
-               bo.mostrar(a);
-               break;
-
-            case 4:
-            int xx=0,yy=x;
-               bo.Qsort(a, xx, yy);
-               break;
-
+     Scanner owl = new Scanner(System.in);
+     ordena Ordenar=new ordena();
+     int o,n=0;
+     int[]vector=null;
+     boolean ff=false;
+     do {
+        try {
+           System.out.print("\n\n\n\n    -Quick Sort-\n"+
+           "\n 1. Generar vector."+
+           "\n 2. Ordenar."+
+           "\n 0. Salir.\n    Opción: ");
+           o=owl.nextInt();
+           switch (o) {
             case 0:
-               break;
+                ff=true;
+                owl.close();
+            break;
+            case 1:
+                System.out.print("      -Ingrese el tamaño del vector: ");
+                n=owl.nextInt();
+                vector=new int[n];
+                llenar(vector);
+            break;
+            case 2:
+                
+                if(vector!=null){
+                    Ordenar.Qsort(vector, 0, vector.length-1);
+                    System.out.println("    -Vector ordenado-\n");
+                    Ordenar.Mostrar(vector);                
+                    
+                }else{
+                    System.out.println("\n----Cree un vector primero----\n");
+                }
+            break;
+                  
+            
             default:
-               break;
-         }
-         } while (op!=0);
-      
+                System.out.println(" \n-Ingese  una opcion valida...");
+            break;
+               
+           }           
+        } catch (Exception e) {
+           System.out.println("\n -Intente de nuevo. Caracter no valido...\n\n") ;
+           owl.next();
+        }
+     } while (!ff);
    }
 }
 
 class ordena{
-   
-   
-   public void Qsort (int matriz[],int a, int  b){
-      int ma[]=new ma[matriz.length];
-      int buf,x=a,y=b, pivote=matriz[(x+y)/2];
-      do {
-            while(matriz[x]<pivote){
-                  x++;
+    public void Mostrar(int [] vec){
+       for (int i = 0; i < vec.length; i++) {
+          System.out.print(vec[i]+", ");
+       }
+    }
+    public void Qsort(int [] vec,int a, int b){
+        int aux,i=a,j=b,pivote=vec[(a+b)/2];
+        do {
+            while(vec[i]<pivote){
+                i++;
             }
-            while (matriz[y]>pivote) {
-                  y--;
+            while(vec[j]>pivote){
+                j--;
             }
-            if(x<=y){
-                  buf=matriz[x];
-                  matriz[x]=matriz[y];
-                  matriz[y]=buf;
-                  x++;
-                  y--;
-            }
-      } while (x<=y);
-      if(a<y){
-            Qsort(matriz, a, y);
-      }
-      if(x<b){
-            Qsort(matriz, x, b);
-      }
-      matriz=ma;
-   }
-   public void mostrar (int [] a){
-      for (int k = 0; k < a.length; k++) {
-         System.out.print(" "+a[k]);
-      }
-   }
+            if(i<=j){
+                aux=vec[i];
+                vec[i]=vec[j];
+                vec[j]=aux;
+                i++;
+                j--;
+            }            
+        } while (i<=j);
+        if(a<j){
+            Qsort(vec, a, j);
+        }
+        if(i<b){
+            Qsort(vec, i, b);
+        }
+    }
+
 }

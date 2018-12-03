@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class bubbleSort{
+class Insertion{
    public static void llenar(int [] vec){
        System.out.println("    -Vector generado-    \n");
       for (int i = 0; i < vec.length; i++) {
@@ -17,7 +17,7 @@ class bubbleSort{
      boolean ff=false;
      do {
         try {
-           System.out.print("\n\n\n\n    -Bubble Sort-\n"+
+           System.out.print("\n\n\n\n    -Insertion Sort-\n"+
            "\n 1. Generar vector."+
            "\n 2. Ordenar."+
            "\n 0. Salir.\n    Opción: ");
@@ -36,7 +36,7 @@ class bubbleSort{
             case 2:
                 
                 if(vector!=null){
-                    Ordenar.BubbleSort(vector);
+                    Ordenar.insercion(vector);
                     System.out.println("    -Vector ordenado-\n");
                     Ordenar.Mostrar(vector);                
                     
@@ -65,19 +65,19 @@ class ordena{
           System.out.print(vec[i]+", ");
        }
     }
-    public void BubbleSort(int[]vec){
-      int aux;
-      for (int i = 0; i < vec.length; i++) {
-          for (int j = i + 1; j < vec.length; j++) {
-              if(vec[i]>vec[j]){
-                  aux=vec[i];
-                  vec[i]=vec[j];
-                  vec[j]=aux;
-              }
-          }   
-      }
-      
-  }
+    public void insercion(int [] vec){
+        int aux,i,j;
+        for(i=1;i<vec.length;i++){
+            aux=vec[i];
+            j=i-1;
+            while (j>=0&&vec[j]>aux) {
+                vec[j+1]=vec[j];
+                
+                j--;
+            }
+            vec[j+1]=aux;
+        }
+    }
 
 
 }
